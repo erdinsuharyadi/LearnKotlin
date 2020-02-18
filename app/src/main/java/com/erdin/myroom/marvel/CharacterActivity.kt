@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.erdin.myroom.R
@@ -32,7 +33,7 @@ class CharacterActivity : AppCompatActivity() {
         coroutineScope = CoroutineScope(Job() + Dispatchers.IO)
 
         binding.rvCharacter.adapter = CharacterAdapter()
-        binding.rvCharacter.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        binding.rvCharacter.layoutManager = GridLayoutManager(this,3, RecyclerView.VERTICAL, false)
 
         charDao = CharacterDatabase.getCharDatabase(this).characterDao()
 
@@ -97,7 +98,7 @@ class CharacterActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.IO) {
                     response.data?.results?.map {
-                        charDao.insert(CharacterEntity(it.id.orEmpty(), it.name.orEmpty(), it.description.orEmpty(), it.imageCharacter?.path + "/standard_medium."+ it.imageCharacter?.extension, it.urls?.get(0)?.url.orEmpty()))
+                        charDao.insert(CharacterEntity(it.id.orEmpty(), it.name.orEmpty(), it.description.orEmpty(), it.imageCharacter?.path + "/portrait_medium."+ it.imageCharacter?.extension, it.urls?.get(0)?.url.orEmpty()))
                     }
                 }
 

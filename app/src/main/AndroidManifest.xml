@@ -30,6 +30,7 @@
         <activity android:name=".room.WordAddActivity" />
         <activity android:name=".room.WordListActivity" />
         <activity android:name=".marvel.CharacterActivity" />
+        <activity android:name=".marvel.CharacterDetailActivity" />
     </application>
 
 </manifest>
