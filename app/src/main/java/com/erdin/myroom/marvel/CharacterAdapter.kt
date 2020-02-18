@@ -1,11 +1,15 @@
 package com.erdin.myroom.marvel
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.erdin.myroom.R
 import com.erdin.myroom.databinding.ItemRvCharacterBinding
+import com.squareup.picasso.Picasso
 
 class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>() {
 
@@ -25,9 +29,14 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterAdapter.CharacterHolder>(
 
     override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
         val item =items[position]
-        holder.binding.tvAge.text = item.description
+        holder.binding.tvDesc.text = item.description
         holder.binding.tvName.text = item.name
-//        holder.binding.tvSalary.text = item.description
+
+        Picasso.get()
+            .load(item.imageCharacter)
+            .placeholder(R.drawable.ic_image_black_24dp)
+            .error(R.drawable.ic_broken_image_black_24dp)
+            .into(holder.binding.ivCharacter)
     }
 
     class CharacterHolder(val binding: ItemRvCharacterBinding) : RecyclerView.ViewHolder(binding.root)

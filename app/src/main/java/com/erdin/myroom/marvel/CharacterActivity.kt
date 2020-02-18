@@ -1,22 +1,17 @@
 package com.erdin.myroom.marvel
 
-import android.app.Activity
-import android.content.Intent
-import android.database.DatabaseUtils
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.RoomDatabase
 import com.erdin.myroom.R
 import com.erdin.myroom.databinding.ActivityCharacterBinding
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_rv_character.*
 import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,12 +34,15 @@ class CharacterActivity : AppCompatActivity() {
 
         showCharList()
 
+
     }
 
     private fun showCharList() {
         coroutineScope.launch {
             val listChar = charDao.getAllChar()
             withContext(Dispatchers.Main) {
+                binding.pbCharacter.visibility = View.VISIBLE
+
                 if (listChar.isEmpty()) {
                     Log.d("RoomDB", "Kosong")
                     marvelApiCoroutine()
@@ -52,6 +50,7 @@ class CharacterActivity : AppCompatActivity() {
                     Log.d("RoomDB", "Ada isinya")
                     Log.d("RoomDB", listChar.toString())
 
+                    binding.pbCharacter.visibility = View.GONE
                     (binding.rvCharacter.adapter as CharacterAdapter).addList(listChar)
                 }
 
@@ -84,7 +83,7 @@ class CharacterActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.IO) {
                     response.data?.results?.map {
-                        charDao.insert(CharacterEntity(it.id.orEmpty(), it.name.orEmpty(), it.description.orEmpty(), it.imageCharacter?.path + "/portrait_medium."+ it.imageCharacter?.extension, it.urls?.get(0)?.url.orEmpty()))
+                        charDao.insert(CharacterEntity(it.id.orEmpty(), it.name.orEmpty(), it.description.orEmpty(), it.imageCharacter?.path + "/standard_medium."+ it.imageCharacter?.extension, it.urls?.get(0)?.url.orEmpty()))
                     }
                 }
 
@@ -98,6 +97,7 @@ class CharacterActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
