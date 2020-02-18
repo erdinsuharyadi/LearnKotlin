@@ -2,6 +2,7 @@ package com.erdin.myroom.marvel
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.erdin.myroom.R
 import com.erdin.myroom.databinding.ActivityCharacterBinding
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_rv_character.*
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,6 +24,11 @@ class CharacterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+        title = "Marvel Heroes"
+
         coroutineScope = CoroutineScope(Job() + Dispatchers.IO)
 
         binding.rvCharacter.adapter = CharacterAdapter()
@@ -35,6 +39,16 @@ class CharacterActivity : AppCompatActivity() {
         showCharList()
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showCharList() {
