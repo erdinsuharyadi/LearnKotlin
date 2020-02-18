@@ -26,6 +26,9 @@
         </activity>
         <activity android:name=".ListWebsiteActivity" />
         <activity android:name=".WebViewActivity" />
+        <activity android:name=".room.WordAddActivity" />
+        <activity android:name=".room.WordListActivity" />
+        <activity android:name=".marvel.CharacterActivity" />
     </application>
 
 </manifest>

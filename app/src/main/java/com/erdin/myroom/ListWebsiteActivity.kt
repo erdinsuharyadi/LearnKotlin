@@ -24,7 +24,7 @@ class ListWebsiteActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_website)
 
-        binding.recyclerView.adapter = ListWebsiteAdapter { partItem : Website -> partItemClicked(partItem)}
+        binding.recyclerView.adapter = ListWebsiteAdapter { partItem: Website -> partItemClicked(partItem)}
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         defaultSharedPref = PreferenceManager.getDefaultSharedPreferences(applicationContext)

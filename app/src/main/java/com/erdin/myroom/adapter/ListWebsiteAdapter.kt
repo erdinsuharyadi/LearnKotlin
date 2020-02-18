@@ -3,6 +3,7 @@ package com.erdin.myroom.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.erdin.myroom.R
@@ -14,7 +15,13 @@ class ListWebsiteAdapter(private val clickListener: (Website) -> Unit): Recycler
         Website("Google", "https://google.com"),
         Website("Twitter", "https://twitter.com"),
         Website("Kotlin", "https://kotlinlang.org/"),
-        Website("Arkademy", "https://www.arkademy.com/")
+        Website("Arkademy", "https://www.arkademy.com/"),
+        Website("Facebook", "https://www.facebook.com/"),
+        Website("Instagram", "https://www.instagram.com/"),
+        Website("Stackoverflow", "https://stackoverflow.com/"),
+        Website("Medium", "https://medium.com/"),
+        Website("Github", "https://github.com/"),
+        Website("Petani Kode","https://www.petanikode.com/")
 
     )
 

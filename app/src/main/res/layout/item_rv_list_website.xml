@@ -32,4 +32,14 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp" />
 
+    <RadioButton
+        android:id="@+id/rb_list_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp" />
+
 </RelativeLayout>

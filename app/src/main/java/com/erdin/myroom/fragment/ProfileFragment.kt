@@ -10,7 +10,9 @@ import com.erdin.myroom.BaseFragment
 import com.erdin.myroom.R
 import com.erdin.myroom.ShowWebActivity
 import com.erdin.myroom.databinding.FragmentProfileBinding
+import com.erdin.myroom.marvel.CharacterActivity
 import com.erdin.myroom.model.DataModel
+import com.erdin.myroom.room.WordListActivity
 
 
 class ProfileFragment : BaseFragment() {
@@ -27,6 +29,16 @@ class ProfileFragment : BaseFragment() {
 
         binding.btnListWeb.setOnClickListener {
             val intent = Intent(activity, ShowWebActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnShowRoom.setOnClickListener {
+            val intent = Intent(activity, WordListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnCharacters.setOnClickListener {
+            val intent = Intent(activity, CharacterActivity::class.java)
             startActivity(intent)
         }
 
