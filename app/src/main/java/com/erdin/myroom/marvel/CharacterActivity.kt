@@ -54,4 +54,10 @@ class CharacterActivity : AppCompatActivity(), CharacterContract.View {
     override fun progressBarChar(view: Int) {
         binding.pbCharacter.visibility = view
     }
+
+    override fun onDestroy() {
+        presenter = null
+        coroutineScope.cancel()
+        super.onDestroy()
+    }
 }
