@@ -10,13 +10,12 @@ class CharacterPresenter(private val coroutineScope: CoroutineScope,
                          private val charDao: CharacterDao,
                          private val view: CharacterContract.View) : CharacterContract.Presenter {
 
-
     override fun showCharList() {
         coroutineScope.launch {
             val listChar = charDao.getAllChar()
             withContext(Dispatchers.Main) {
 
-                view.progressBarChar(View.VISIBLE)
+                view.showProgressBar()
 
                 if (listChar.isEmpty()) {
                     Log.d("RoomDB", "Kosong")
@@ -26,7 +25,7 @@ class CharacterPresenter(private val coroutineScope: CoroutineScope,
                     Log.d("RoomDB", "Ada isinya")
                     Log.d("RoomDB", listChar.toString())
 
-                    view.progressBarChar(View.GONE)
+                    view.hideProgressBar()
                     view.addListChar(listChar)
                 }
             }
@@ -41,7 +40,7 @@ class CharacterPresenter(private val coroutineScope: CoroutineScope,
 
         val service = retrofit.create(CharacterApiService::class.java)
 
-        val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+//        val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
         coroutineScope.launch {
 
@@ -57,7 +56,7 @@ class CharacterPresenter(private val coroutineScope: CoroutineScope,
                 Log.d("marvelApiSukses", response.toString())
 
                 withContext(Dispatchers.IO) {
-                    response.data?.results?.map {
+                    response.data?.results?.forEach {
                         charDao.insert(CharacterEntity(it.id.orEmpty(), it.name.orEmpty(), it.description.orEmpty(), it.imageCharacter?.path + "/portrait_medium."+ it.imageCharacter?.extension, it.urls?.get(0)?.url.orEmpty()))
                     }
                 }

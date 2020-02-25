@@ -2,6 +2,7 @@ package com.erdin.myroom.marvel
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -51,8 +52,12 @@ class CharacterActivity : AppCompatActivity(), CharacterContract.View {
         (binding.rvCharacter.adapter as CharacterAdapter).addList(list)
     }
 
-    override fun progressBarChar(view: Int) {
-        binding.pbCharacter.visibility = view
+    override fun showProgressBar() {
+        binding.pbCharacter.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        binding.pbCharacter.visibility = View.GONE
     }
 
     override fun onDestroy() {

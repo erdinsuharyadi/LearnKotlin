@@ -4,7 +4,8 @@ interface CharacterContract {
 
     interface View {
         fun addListChar(list: List<CharacterEntity>)
-        fun progressBarChar(view: Int)
+        fun showProgressBar()
+        fun hideProgressBar()
     }
 
     interface Presenter {
